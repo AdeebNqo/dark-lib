@@ -62,23 +62,6 @@ idtag::idtag(std::string mp3):title(""),genre(""),artist(""),year(""),track(""),
 			}
 		}
 		std::cout<<album<<std::endl;
-		/*
-                mp.read(tag,3);//read the tag bytes
-                tag[3]='\0';
-                mp.read(Title,30);//read the song titile
-                Title[30]='\0';//read the title bytes
-                mp.read(artist,30);//read the artist bytes
-                artist[30]='\0';
-                mp.read(album,30);//read the album bytes
-                album[30]='\0';
-                mp.read(year,30);//read theyear bytes
-                year[30]='\0';
-                mp.read(comment,28);//read the comments bytes
-                comment[28]='\0';
-                for(int y=0;y<30;y++)
-                {
-              		std::cout<<Title[y]<<"\n";
-                }*/
 	}
 }
 //descructor

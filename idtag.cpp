@@ -61,7 +61,6 @@ idtag::idtag(std::string mp3):title(""),genre(""),artist(""),year(""),track(""),
 				genre +=idtag[i];
 			}
 		}
-		std::cout<<album<<std::endl;
 	}
 }
 //descructor

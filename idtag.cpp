@@ -3,12 +3,13 @@
 #include<string>
 #include<iostream>
 //constructor
-idtag::idtag(std::string mp3){
-	std::fstream mp;
+idtag::idtag(std::string mp3):title(""),genre(""),artist(""),year(""),track(""),comment(""),album(""),tag(""){
+	std::fstream song;
 
         //opening the mp3
-        mp.open(mp3.c_str());
-        if(!mp.is_open())
+        song.open(mp3.c_str());
+	//checking existence of mp3 file
+        if(!song.is_open())
         {
                 std::cerr<<"failed to open the file"<<std::endl;
         }
@@ -24,21 +25,15 @@ idtag::idtag(std::string mp3){
 		}
 		//reading the first 'useless' bytes to our waster bin
 		char *waste = new char[count-128];
-		mp.read(waste,count-128);
+
+		//reading the id3v1 tag
+		song.read(waste,count-128);
 		//printing the remaining bytes
 		char *idtag = new char[128];
-		mp.read(idtag,128);
-		std::string tag("");
-		std::string title("");
-		std::string artist("");
-		std::string album("");
-		std::string year("");
-		std::string comment("");
-		std::string zero_byte("");
-		std::string track("");
-		std::string genre("");
+		
+		song.read(idtag,128);
 		for (int i=0;i<128;i++){
-			if (i<3){
+			if (i<2){
 				tag+=idtag[i];
 			}
 			else if (i<32){
@@ -66,7 +61,7 @@ idtag::idtag(std::string mp3){
 				genre +=idtag[i];
 			}
 		}
-		std::cout<<genre<<std::endl;
+		std::cout<<album<<std::endl;
 		/*
                 mp.read(tag,3);//read the tag bytes
                 tag[3]='\0';
@@ -91,3 +86,27 @@ idtag::~idtag(){
 	
 }
 //methods
+std::string idtag::getTag(){
+	return tag;
+}
+std::string idtag::getTitle(){
+	return title;
+}
+std::string idtag::getArtist(){
+	return artist;
+}
+std::string idtag::getAlbum(){
+	return album;
+}
+std::string idtag::getYear(){
+	return year;
+}
+std::string idtag::getComment(){
+	return comment;
+}
+std::string idtag::getTrackNumber(){
+	return track;
+}
+std::string idtag::getGenre(){
+	return genre;
+}

@@ -14,6 +14,60 @@ idtag::idtag(std::string mp3){
         }
         else
         {
+		//getting total bytes of mp3
+		std::ifstream file(mp3.c_str());
+		char byte;
+		int count=0;
+		while(!file.eof()){
+			count++;
+			file.get(byte);
+		}
+		//reading the first 'useless' bytes to our waster bin
+		char *waste = new char[count-128];
+		mp.read(waste,count-128);
+		//printing the remaining bytes
+		char *idtag = new char[128];
+		mp.read(idtag,128);
+		std::string tag("");
+		std::string title("");
+		std::string artist("");
+		std::string album("");
+		std::string year("");
+		std::string comment("");
+		std::string zero_byte("");
+		std::string track("");
+		std::string genre("");
+		for (int i=0;i<128;i++){
+			if (i<3){
+				tag+=idtag[i];
+			}
+			else if (i<32){
+				title+=idtag[i];
+			}
+			else if (i<62){
+				artist+=idtag[i];
+			}
+			else if (i<92){
+				album+=idtag[i];
+			}
+			else if (i<96){
+				year+=idtag[i];
+			}
+			else if (i<126){
+				comment+=idtag[i];
+			}
+			else if (i<127){
+				zero_byte+=idtag[i];
+			}
+			else if (i<128){
+				track+=idtag[i];
+			}
+			else if (i<129){
+				genre +=idtag[i];
+			}
+		}
+		std::cout<<genre<<std::endl;
+		/*
                 mp.read(tag,3);//read the tag bytes
                 tag[3]='\0';
                 mp.read(Title,30);//read the song titile
@@ -29,7 +83,7 @@ idtag::idtag(std::string mp3){
                 for(int y=0;y<30;y++)
                 {
               		std::cout<<Title[y]<<"\n";
-                }
+                }*/
 	}
 }
 //descructor

@@ -4,3 +4,5 @@ idtag.o: idtag.cpp
 	g++ idtag.cpp -c
 clean:
 	rm -f *.o app
+run:
+	./app
